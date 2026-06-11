@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2 Arena - Турниры и новости Counter-Strike 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .user-menu { display: flex; align-items: center; gap: 0.5rem; }
+        .btn-profile { background: rgba(234, 88, 12, 0.2); color: #ea580c; padding: 0.5rem 1rem; border-radius: 0.375rem; text-decoration: none; transition: all 0.3s; font-weight: 500; }
+        .btn-profile:hover { background: #ea580c; color: white; }
+        .btn-logout { background: rgba(220, 38, 38, 0.2); color: #fca5a5; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .btn-logout:hover { background: #dc2626; color: white; }
+        .cart-icon-header { position: relative; color: #d1d5db; transition: color 0.3s; margin-right: 0.5rem; display: flex; align-items: center; }
+        .cart-icon-header:hover { color: #ea580c; }
+        .cart-count { position: absolute; top: -10px; right: -12px; background: #ea580c; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 50%; min-width: 18px; text-align: center; }
+        @media (max-width: 1024px) {
+            nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #000000; flex-direction: column; padding: 1rem; gap: 1rem; border-top: 1px solid #ea580c; z-index: 100; }
+            nav.show { display: flex; }
+            nav button { padding: 0.75rem; text-align: left; width: 100%; }
+            .mobile-menu-button { display: block; }
+        }
+        @media (min-width: 1025px) { .mobile-menu-button { display: none; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>CS2 ARENA</span>
+                </a>
+                <nav>
+                    <button class="active" onclick="window.location.href='index.html'">Главная</button>
+                    <button onclick="window.location.href='catalog.html'">Магазин</button>
+                    <button onclick="scrollToSection('tournaments')">Турниры</button>
+                    <button onclick="scrollToSection('news')">Новости</button>
+                    <button onclick="window.location.href='teams.html'">Команды</button>
+                    <button onclick="window.location.href='matches.html'">Матчи</button>
+                    <button onclick="window.location.href='teams-ranking.html'">Рейтинг</button>
+                    <button onclick="window.location.href='404.html'">Стримы</button>
+                </nav>
+                <div class="auth-buttons" id="authButtons">
+                    <a href="login.html" class="btn-login">Вход</a>
+                    <a href="register.html" class="btn-register">Регистрация</a>
+                </div>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <a href="cart.html" class="cart-icon-header">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span id="headerCartCount" class="cart-count">0</span>
+                    </a>
+                    <a href="profile.html" class="btn-profile" id="profileBtn">
+                        <span id="userNameDisplay"></span>
+                    </a>
+                    <button class="btn-logout" onclick="logout()">Выйти</button>
+                </div>
+                <button class="mobile-menu-button" onclick="toggleMobileMenu()">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <img src="img/iem-katowice.jpg" alt="CS2 Tournament" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span>COUNTER-STRIKE 2</span>
+            </div>
+            <h1 class="hero-title">ТУРНИРЫ И НОВОСТИ</h1>
+            <p class="hero-description">Следите за последними турнирами, новостями и статистикой по Counter-Strike 2</p>
+            <div class="hero-buttons">
+                <a href="catalog.html" class="btn-primary">Смотреть магазин</a>
+                <a href="#news" class="btn-secondary" onclick="scrollToSection('news')">Последние новости</a>
+                <a href="teams.html" class="btn-secondary">Топ команды</a>
+                <a href="matches.html" class="btn-secondary">Ближайшие матчи</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span class="stat-text">12 активных турниров</span></div>
+                <div class="stat-item"><svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span class="stat-text">256 команд участвуют</span></div>
+                <div class="stat-item"><svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span class="stat-text">850+ игроков</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tournaments" class="tournaments">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Актуальные турниры</h2>
+                <p class="section-description">Следите за самыми престижными турнирами по CS2</p>
+            </div>
+            <div class="tournaments-grid">
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/iem-katowice.jpg" alt="IEM Katowice 2025" class="tournament-image">
+                        <span class="tournament-status status-open">Регистрация открыта</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">IEM Katowice 2025</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$1,000,000</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span>15-25 февраля 2025</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>Katowice, Poland</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="window.location.href='matches.html'">Смотреть матчи</button>
+                    </div>
+                </div>
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/esl-pro-league.jpg" alt="ESL Pro League" class="tournament-image">
+                        <span class="tournament-status status-live">Идёт сейчас</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">ESL Pro League Season 19</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$850,000</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span>1-20 марта 2025</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="window.location.href='matches.html'">Смотреть матчи</button>
+                    </div>
+                </div>
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/blast-premier.jpg" alt="BLAST Premier" class="tournament-image">
+                        <span class="tournament-status status-upcoming">Скоро</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">BLAST Premier Spring</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$425,000</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span>10-18 марта 2025</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="window.location.href='matches.html'">Смотреть матчи</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="news" class="news">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Последние новости</h2><p class="section-description">Будьте в курсе всех событий мира Counter-Strike 2</p></div>
+            <div class="news-grid">
+                <article class="news-card" onclick="window.location.href='404.html'">
+                    <div class="news-image-wrapper">
+                        <img src="img/iem-katowice.jpg" alt="News" class="news-image">
+                        <span class="news-category">Турниры</span>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Natus Vincere выигрывают IEM Katowice с невероятным камбэком</h3>
+                        <p class="news-excerpt">В захватывающем финале Na`Vi смогли вернуться с 0-2 и забрать трофей, обыграв FaZe Clan в пятой карте.</p>
+                        <div class="news-meta"><div class="news-date"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>2 часа назад</span></div></div>
+                    </div>
+                </article>
+                <article class="news-card" onclick="window.location.href='404.html'">
+                    <div class="news-image-wrapper">
+                        <img src="img/blast-premier.jpg" alt="News" class="news-image">
+                        <span class="news-category">Обновления</span>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Valve анонсировали новое обновление баланса оружия</h3>
+                        <p class="news-excerpt">Разработчики представили список изменений, которые коснутся AWP, AK-47 и нескольких SMG.</p>
+                        <div class="news-meta"><div class="news-date"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>5 часов назад</span></div></div>
+                    </div>
+                </article>
+                <article class="news-card" onclick="window.location.href='404.html'">
+                    <div class="news-image-wrapper">
+                        <img src="img/esl-pro-league.jpg" alt="News" class="news-image">
+                        <span class="news-category">Игроки</span>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">s1mple объявил о перерыве в карьере</h3>
+                        <p class="news-excerpt">Легендарный игрок CS2 заявил о необходимости взять паузу для восстановления и переоценки целей.</p>
+                        <div class="news-meta"><div class="news-date"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>1 день назад</span></div></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="shop" class="tournaments" style="background: #000000;">
+        <div class="container">
+            <div class="section-header"><h2 class="section-title">Популярные товары</h2><p class="section-description">Лучшие скины и оборудование для профессиональной игры</p></div>
+            <div class="tournaments-grid">
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/ak47-redline.jpg" alt="AK-47 Redline" class="tournament-image">
+                        <span class="tournament-status status-live">Хит продаж</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">AK-47 | Redline</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$245.99</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg><span>Field-Tested</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="addToCartFromIndex('AK-47 Redline', '$245.99', 'Field-Tested', 'img/ak47-redline.jpg')">В корзину</button>
+                    </div>
+                </div>
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/m4a4-howl.jpg" alt="M4A4 Howl" class="tournament-image">
+                        <span class="tournament-status status-open">В наличии</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">M4A4 | Howl</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$1,250.00</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg><span>Minimal Wear</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="addToCartFromIndex('M4A4 Howl', '$1,250.00', 'Minimal Wear', 'img/m4a4-howl.jpg')">В корзину</button>
+                    </div>
+                </div>
+                <div class="tournament-card">
+                    <div class="tournament-image-wrapper">
+                        <img src="img/karambit-fade.jpg" alt="Karambit Fade" class="tournament-image">
+                        <span class="tournament-status status-upcoming">Ограниченный</span>
+                    </div>
+                    <div class="tournament-content">
+                        <h3 class="tournament-title">Karambit | Fade</h3>
+                        <div class="tournament-info">
+                            <div class="info-item"><svg class="info-icon info-icon-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="prize-amount">$2,800.00</span></div>
+                            <div class="info-item"><svg class="info-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg><span>Factory New</span></div>
+                        </div>
+                        <button class="tournament-button" onclick="addToCartFromIndex('Karambit Fade', '$2,800.00', 'Factory New', 'img/karambit-fade.jpg')">В корзину</button>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="catalog.html" class="btn-primary">Смотреть все товары</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <svg style="width: 1.5rem; height: 1.5rem; color: #ea580c;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span style="color: white;">CS2 ARENA</span>
+                    </div>
+                    <p class="footer-description">Ваш главный источник информации о турнирах и новостях Counter-Strike 2</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Разделы</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Магазин</a></li>
+                        <li><a href="#tournaments" onclick="scrollToSection('tournaments')">Турниры</a></li>
+                        <li><a href="#news" onclick="scrollToSection('news')">Новости</a></li>
+                        <li><a href="teams.html">Команды</a></li>
+                        <li><a href="matches.html">Матчи</a></li>
+                        <li><a href="teams-ranking.html">Рейтинг</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Аккаунт</h4>
+                    <ul class="footer-links">
+                        <li><a href="login.html">Вход</a></li>
+                        <li><a href="register.html">Регистрация</a></li>
+                        <li><a href="admin-login.html">Админ-панель</a></li>
+                        <li><a href="404.html">Тест 404</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 CS2 Arena. Все права защищены.</p></div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }
+        function toggleMobileMenu() {
+            const nav = document.querySelector('nav');
+            if (nav) nav.classList.toggle('show');
+        }
+        function addToCartFromIndex(name, price, quality, image) {
+            const currentUser = localStorage.getItem('cs2_currentUser');
+            if (!currentUser) {
+                if (confirm('Для добавления товаров в корзину необходимо войти в аккаунт. Перейти на страницу входа?')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            const user = JSON.parse(currentUser);
+            const cartKey = `cs2_cart_${user.id}`;
+            let cart = JSON.parse(localStorage.getItem(cartKey) || '[]');
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) { existingItem.quantity++; } 
+            else { cart.push({ id: Date.now(), name: name, price: price, quality: quality, image: image, quantity: 1 }); }
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+            const notification = document.createElement('div');
+            notification.style.cssText = `position:fixed;bottom:20px;right:20px;background:#10b981;color:white;padding:1rem 1.5rem;border-radius:0.5rem;z-index:1000;`;
+            notification.innerHTML = `✅ ${name} добавлен в корзину!`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 2000);
+            updateCartCount();
+        }
+        function updateCartCount() {
+            const currentUser = localStorage.getItem('cs2_currentUser');
+            if (!currentUser) return;
+            const user = JSON.parse(currentUser);
+            const cart = JSON.parse(localStorage.getItem(`cs2_cart_${user.id}`) || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCountElement = document.getElementById('headerCartCount');
+            if (cartCountElement) { cartCountElement.textContent = count; cartCountElement.style.display = count > 0 ? 'inline-block' : 'none'; }
+        }
+        function checkAuth() {
+            const currentUser = localStorage.getItem('cs2_currentUser');
+            const authButtons = document.getElementById('authButtons');
+            const userMenu = document.getElementById('userMenu');
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                if (authButtons) authButtons.style.display = 'none';
+                if (userMenu) userMenu.style.display = 'flex';
+                if (userNameDisplay) userNameDisplay.textContent = user.username;
+                updateCartCount();
+            } else {
+                if (authButtons) authButtons.style.display = 'flex';
+                if (userMenu) userMenu.style.display = 'none';
+            }
+        }
+        function logout() { localStorage.removeItem('cs2_currentUser'); localStorage.removeItem('cs2_rememberMe'); window.location.href = 'index.html'; }
+        checkAuth();
+    </script>
+</body>
+</html>
