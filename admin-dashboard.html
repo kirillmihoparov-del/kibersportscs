@@ -6,20 +6,11 @@
     <title>Админ-панель - CS2 Arena</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #0f0f1a;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        .admin-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-        /* Sidebar */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0f0f1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        
+        .admin-wrapper { display: flex; min-height: 100vh; }
+        
         .admin-sidebar {
             width: 280px;
             background: linear-gradient(180deg, #0a0a0f 0%, #11111a 100%);
@@ -28,6 +19,7 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+            z-index: 100;
         }
         .sidebar-logo {
             display: flex;
@@ -37,22 +29,11 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #2a2a3a;
         }
-        .sidebar-logo svg {
-            width: 32px;
-            height: 32px;
-            color: #ea580c;
-        }
-        .sidebar-logo span {
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-        .sidebar-menu {
-            list-style: none;
-        }
-        .sidebar-item {
-            margin-bottom: 0.5rem;
-        }
+        .sidebar-logo svg { width: 32px; height: 32px; color: #ea580c; }
+        .sidebar-logo span { color: white; font-size: 1.25rem; font-weight: 600; }
+        
+        .sidebar-menu { list-style: none; }
+        .sidebar-item { margin-bottom: 0.5rem; }
         .sidebar-link {
             display: flex;
             align-items: center;
@@ -63,34 +44,17 @@
             border-radius: 0.5rem;
             transition: all 0.3s;
         }
-        .sidebar-link:hover,
-        .sidebar-link.active {
+        .sidebar-link:hover, .sidebar-link.active {
             background: rgba(234, 88, 12, 0.1);
             color: #ea580c;
         }
-        .sidebar-link svg {
-            width: 20px;
-            height: 20px;
-        }
-        .logout-btn {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #2a2a3a;
-        }
-        .logout-btn .sidebar-link {
-            color: #dc2626;
-        }
-        .logout-btn .sidebar-link:hover {
-            background: rgba(220, 38, 38, 0.1);
-            color: #dc2626;
-        }
-        /* Main Content */
-        .admin-main {
-            flex: 1;
-            margin-left: 280px;
-            padding: 2rem;
-        }
-        /* Header */
+        .sidebar-link svg { width: 20px; height: 20px; }
+        .logout-btn { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #2a2a3a; }
+        .logout-btn .sidebar-link { color: #dc2626; }
+        .logout-btn .sidebar-link:hover { background: rgba(220, 38, 38, 0.1); color: #dc2626; }
+        
+        .admin-main { flex: 1; margin-left: 280px; padding: 2rem; }
+        
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -99,15 +63,8 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #2a2a3a;
         }
-        .page-title {
-            color: white;
-            font-size: 1.75rem;
-        }
-        .admin-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        .page-title { color: white; font-size: 1.75rem; }
+        .admin-user { display: flex; align-items: center; gap: 1rem; }
         .admin-avatar {
             width: 40px;
             height: 40px;
@@ -119,17 +76,12 @@
             font-weight: 600;
             color: white;
         }
-        .admin-name {
-            color: white;
-        }
-        .admin-role {
-            color: #9ca3af;
-            font-size: 0.75rem;
-        }
-        /* Stats Cards */
+        .admin-name { color: white; }
+        .admin-role { color: #9ca3af; font-size: 0.75rem; }
+        
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -138,38 +90,13 @@
             border: 1px solid #374151;
             border-radius: 1rem;
             padding: 1.5rem;
+            text-align: center;
             transition: all 0.3s;
         }
-        .stat-card:hover {
-            border-color: #ea580c;
-            transform: translateY(-4px);
-        }
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .stat-title {
-            color: #9ca3af;
-            font-size: 0.875rem;
-        }
-        .stat-icon {
-            width: 32px;
-            height: 32px;
-            color: #ea580c;
-        }
-        .stat-value {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .stat-change {
-            color: #10b981;
-            font-size: 0.875rem;
-        }
-        /* Tables */
+        .stat-card:hover { border-color: #ea580c; transform: translateY(-4px); }
+        .stat-number { color: #ea580c; font-size: 2rem; font-weight: 700; }
+        .stat-label { color: #9ca3af; font-size: 0.875rem; margin-top: 0.25rem; }
+        
         .section-card {
             background: rgba(31, 41, 55, 0.5);
             border: 1px solid #374151;
@@ -185,80 +112,49 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .section-title {
-            color: white;
-            font-size: 1.25rem;
-        }
-        .btn-add {
-            background: #ea580c;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-add:hover {
-            background: #c2410c;
-            transform: translateY(-2px);
-        }
-        .data-table {
-            width: 100%;
-            overflow-x: auto;
-        }
-        .data-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .data-table th,
-        .data-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #374151;
-            color: #d1d5db;
-        }
-        .data-table th {
-            color: #9ca3af;
-            font-weight: 500;
-            font-size: 0.875rem;
-        }
+        .section-title { color: white; font-size: 1.25rem; }
+        
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #374151; color: #d1d5db; }
+        th { color: #9ca3af; font-weight: 500; font-size: 0.875rem; }
+        tr:hover { background: rgba(55, 65, 81, 0.3); }
+        
         .status-badge {
             display: inline-block;
             padding: 0.25rem 0.5rem;
             border-radius: 9999px;
             font-size: 0.75rem;
+            font-weight: 500;
         }
-        .status-active {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-        }
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .btn-edit, .btn-delete {
-            padding: 0.25rem 0.5rem;
+        .status-pending { background: rgba(234, 88, 12, 0.2); color: #fb923c; }
+        .status-processing { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .status-shipped { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
+        .status-delivered { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        
+        .action-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .btn-action {
+            padding: 0.3rem 0.8rem;
+            border: none;
             border-radius: 0.375rem;
             cursor: pointer;
-            border: none;
             font-size: 0.75rem;
+            transition: all 0.3s;
         }
-        .btn-edit {
-            background: #3b82f6;
-            color: white;
-        }
-        .btn-delete {
-            background: #dc2626;
-            color: white;
-        }
-        /* Modal */
+        .btn-confirm { background: #10b981; color: white; }
+        .btn-confirm:hover { background: #059669; }
+        .btn-shipped { background: #8b5cf6; color: white; }
+        .btn-shipped:hover { background: #7c3aed; }
+        .btn-delivered { background: #3b82f6; color: white; }
+        .btn-delivered:hover { background: #2563eb; }
+        .btn-cancel { background: #dc2626; color: white; }
+        .btn-cancel:hover { background: #b91c1c; }
+        .btn-view { background: #374151; color: white; }
+        .btn-view:hover { background: #4b5563; }
+        .btn-refresh { background: #ea580c; color: white; }
+        .btn-refresh:hover { background: #c2410c; }
+        
         .modal {
             display: none;
             position: fixed;
@@ -270,14 +166,18 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
         }
+        .modal.active { display: flex; }
         .modal-content {
             background: #1f2937;
             border-radius: 1rem;
             padding: 2rem;
-            width: 90%;
-            max-width: 500px;
+            width: 100%;
+            max-width: 600px;
             border: 1px solid #ea580c;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .modal-header {
             display: flex;
@@ -285,10 +185,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
         }
-        .modal-title {
-            color: white;
-            font-size: 1.25rem;
-        }
+        .modal-title { color: white; font-size: 1.25rem; }
         .modal-close {
             background: none;
             border: none;
@@ -296,49 +193,51 @@
             cursor: pointer;
             font-size: 1.5rem;
         }
-        .modal-close:hover {
-            color: white;
+        .modal-close:hover { color: white; }
+        .modal-body { color: #d1d5db; }
+        .modal-body .order-info { margin-bottom: 1rem; }
+        .modal-body .order-info strong { color: #ea580c; }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
-        .modal-form-group {
-            margin-bottom: 1rem;
-        }
-        .modal-form-group label {
-            display: block;
-            color: #d1d5db;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-        }
-        .modal-form-group input,
-        .modal-form-group select {
-            width: 100%;
-            padding: 0.5rem;
-            background: #374151;
-            border: 1px solid #4b5563;
-            border-radius: 0.375rem;
-            color: white;
-        }
-        .modal-save {
-            width: 100%;
+        .modal-actions button {
+            flex: 1;
             padding: 0.75rem;
-            background: #ea580c;
-            color: white;
             border: none;
             border-radius: 0.5rem;
+            font-weight: 600;
             cursor: pointer;
-            margin-top: 1rem;
+            transition: all 0.3s;
+            min-width: 100px;
         }
+        .btn-modal-close { background: #374151; color: white; }
+        .btn-modal-close:hover { background: #4b5563; }
+        .btn-modal-confirm { background: #10b981; color: white; }
+        .btn-modal-confirm:hover { background: #059669; }
+        .btn-modal-shipped { background: #8b5cf6; color: white; }
+        .btn-modal-shipped:hover { background: #7c3aed; }
+        .btn-modal-delivered { background: #3b82f6; color: white; }
+        .btn-modal-delivered:hover { background: #2563eb; }
+        .btn-modal-cancel { background: #dc2626; color: white; }
+        .btn-modal-cancel:hover { background: #b91c1c; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+        
         @media (max-width: 768px) {
             .admin-sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s;
-                z-index: 100;
             }
-            .admin-sidebar.open {
-                transform: translateX(0);
-            }
-            .admin-main {
-                margin-left: 0;
-            }
+            .admin-sidebar.open { transform: translateX(0); }
+            .admin-main { margin-left: 0; padding: 1rem; }
             .mobile-menu-btn {
                 display: block;
                 position: fixed;
@@ -353,17 +252,13 @@
                 cursor: pointer;
             }
         }
-        .mobile-menu-btn {
-            display: none;
-        }
+        .mobile-menu-btn { display: none; }
     </style>
 </head>
 <body>
     <div class="admin-wrapper">
-        <!-- Mobile Menu Button -->
         <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
 
-        <!-- Sidebar -->
         <aside class="admin-sidebar" id="sidebar">
             <div class="sidebar-logo">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -372,165 +267,51 @@
                 <span>CS2 ARENA Admin</span>
             </div>
             <ul class="sidebar-menu">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link active" data-page="dashboard">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                        </svg>
-                        Дашборд
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="tournaments">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                        Турниры
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="teams">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                        </svg>
-                        Команды
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="news">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                        </svg>
-                        Новости
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="products">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-                        </svg>
-                        Товары
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="players">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                        Игроки
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" data-page="users">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                        </svg>
-                        Пользователи
-                    </a>
-                </li>
-                <li class="sidebar-item logout-btn">
-                    <a href="#" class="sidebar-link" id="logoutLink">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                        </svg>
-                        Выход
-                    </a>
-                </li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link active" data-page="dashboard"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>Дашборд</a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link" data-page="orders"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>Заказы</a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link" data-page="tournaments"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>Турниры</a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link" data-page="news"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>Новости</a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link" data-page="products"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>Товары</a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link" data-page="users"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>Пользователи</a></li>
+                <li class="sidebar-item logout-btn"><a href="#" class="sidebar-link" id="logoutLink"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>Выход</a></li>
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="admin-main">
             <div class="admin-header">
                 <h1 class="page-title" id="pageTitle">Дашборд</h1>
                 <div class="admin-user">
-                    <div class="admin-info">
-                        <div class="admin-name">Администратор</div>
-                        <div class="admin-role">Super Admin</div>
-                    </div>
+                    <div><div class="admin-name">Администратор</div><div class="admin-role">Super Admin</div></div>
                     <div class="admin-avatar">A</div>
                 </div>
             </div>
 
             <div id="pageContent">
-                <!-- Dashboard Content -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Всего турниров</span>
-                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <div class="stat-value" id="totalTournaments">12</div>
-                        <div class="stat-change">+3 за месяц</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Всего команд</span>
-                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                            </svg>
-                        </div>
-                        <div class="stat-value" id="totalTeams">256</div>
-                        <div class="stat-change">+12 за месяц</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Всего игроков</span>
-                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                        </div>
-                        <div class="stat-value" id="totalPlayers">850</div>
-                        <div class="stat-change">+45 за месяц</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <span class="stat-title">Пользователей</span>
-                            <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                            </svg>
-                        </div>
-                        <div class="stat-value" id="totalUsers">1247</div>
-                        <div class="stat-change">+87 за месяц</div>
-                    </div>
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card"><div class="stat-number" id="statOrders">0</div><div class="stat-label">Всего заказов</div></div>
+                    <div class="stat-card"><div class="stat-number" id="statPending">0</div><div class="stat-label">Ожидают обработки</div></div>
+                    <div class="stat-card"><div class="stat-number" id="statShipped">0</div><div class="stat-label">Отправлено</div></div>
+                    <div class="stat-card"><div class="stat-number" id="statCancelled">0</div><div class="stat-label">Отменено</div></div>
                 </div>
 
                 <div class="section-card">
                     <div class="section-header">
-                        <h3 class="section-title">Последние турниры</h3>
-                        <button class="btn-add" onclick="openModal('tournament')">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            Добавить турнир
-                        </button>
+                        <h3 class="section-title">Все заказы</h3>
+                        <button class="btn-action btn-refresh" onclick="loadAllOrders()">🔄 Обновить</button>
                     </div>
-                    <div class="data-table">
-                        <table id="tournamentsTable">
+                    <div class="table-wrapper">
+                        <table>
                             <thead>
-                                <tr><th>Название</th><th>Дата</th><th>Призовой фонд</th><th>Статус</th><th>Действия</th></tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Пользователь</th>
+                                    <th>Дата</th>
+                                    <th>Сумма</th>
+                                    <th>Статус</th>
+                                    <th>Действия</th>
+                                </tr>
                             </thead>
-                            <tbody id="tournamentsList"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-header">
-                        <h3 class="section-title">Последние новости</h3>
-                        <button class="btn-add" onclick="openModal('news')">
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            Добавить новость
-                        </button>
-                    </div>
-                    <div class="data-table">
-                        <table id="newsTable">
-                            <thead><tr><th>Заголовок</th><th>Дата</th><th>Категория</th><th>Действия</th></tr></thead>
-                            <tbody id="newsList"></tbody>
+                            <tbody id="ordersList"></tbody>
                         </table>
                     </div>
                 </div>
@@ -538,298 +319,353 @@
         </main>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
+    <div id="orderModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Добавить</h3>
+                <h3 class="modal-title">📋 Детали заказа #<span id="modalOrderId">—</span></h3>
                 <button class="modal-close" onclick="closeModal()">&times;</button>
             </div>
-            <form id="modalForm">
-                <div id="modalFields"></div>
-                <button type="submit" class="modal-save">Сохранить</button>
-            </form>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-actions" id="modalActions"></div>
         </div>
     </div>
 
     <script>
-        // Проверка авторизации
         if (localStorage.getItem('adminLoggedIn') !== 'true') {
             window.location.href = 'admin-login.html';
         }
 
-        // Данные для демонстрации
-        let tournaments = [
-            { id: 1, name: 'IEM Katowice 2025', date: '15-25 февраля 2025', prize: '$1,000,000', status: 'active' },
-            { id: 2, name: 'ESL Pro League Season 19', date: '1-20 марта 2025', prize: '$850,000', status: 'active' },
-            { id: 3, name: 'BLAST Premier Spring', date: '10-18 марта 2025', prize: '$425,000', status: 'active' }
-        ];
-        
-        let news = [
-            { id: 1, title: 'Natus Vincere выигрывают IEM Katowice', date: '2 часа назад', category: 'Турниры' },
-            { id: 2, title: 'Valve анонсировали новое обновление баланса', date: '5 часов назад', category: 'Обновления' },
-            { id: 3, title: 's1mple объявил о перерыве в карьере', date: '1 день назад', category: 'Игроки' }
-        ];
-
-        // Функции для отображения данных
-        function renderTournaments() {
-            const tbody = document.getElementById('tournamentsList');
-            if (!tbody) return;
-            tbody.innerHTML = tournaments.map(t => `
-                <tr>
-                    <td>${t.name}</td>
-                    <td>${t.date}</td>
-                    <td>${t.prize}</td>
-                    <td><span class="status-badge ${t.status === 'active' ? 'status-active' : 'status-inactive'}">${t.status === 'active' ? 'Активен' : 'Завершен'}</span></td>
-                    <td class="action-buttons">
-                        <button class="btn-edit" onclick="editTournament(${t.id})">✏️</button>
-                        <button class="btn-delete" onclick="deleteTournament(${t.id})">🗑️</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-        
-        function renderNews() {
-            const tbody = document.getElementById('newsList');
-            if (!tbody) return;
-            tbody.innerHTML = news.map(n => `
-                <tr>
-                    <td>${n.title}</td>
-                    <td>${n.date}</td>
-                    <td><span class="status-badge status-active">${n.category}</span></td>
-                    <td class="action-buttons">
-                        <button class="btn-edit" onclick="editNews(${n.id})">✏️</button>
-                        <button class="btn-delete" onclick="deleteNews(${n.id})">🗑️</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function editTournament(id) {
-            const tournament = tournaments.find(t => t.id === id);
-            if (tournament) {
-                openModal('tournament', tournament);
-            }
-        }
-        
-        function deleteTournament(id) {
-            if (confirm('Удалить турнир?')) {
-                tournaments = tournaments.filter(t => t.id !== id);
-                renderTournaments();
-                updateStats();
-            }
-        }
-        
-        function editNews(id) {
-            const newsItem = news.find(n => n.id === id);
-            if (newsItem) {
-                openModal('news', newsItem);
-            }
-        }
-        
-        function deleteNews(id) {
-            if (confirm('Удалить новость?')) {
-                news = news.filter(n => n.id !== id);
-                renderNews();
-                updateStats();
-            }
-        }
-
-        function updateStats() {
-            document.getElementById('totalTournaments').innerText = tournaments.length;
-            document.getElementById('totalNews').innerText = news.length;
-        }
-
-        let currentModalType = '';
-        let currentEditId = null;
-
-        function openModal(type, item = null) {
-            currentModalType = type;
-            currentEditId = item ? item.id : null;
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalFields = document.getElementById('modalFields');
+        // ===== ГЛАВНАЯ ФУНКЦИЯ: ЗАГРУЗКА ВСЕХ ЗАКАЗОВ =====
+        function loadAllOrders() {
+            let allOrders = [];
             
-            if (type === 'tournament') {
-                modalTitle.innerText = currentEditId ? 'Редактировать турнир' : 'Добавить турнир';
-                modalFields.innerHTML = `
-                    <div class="modal-form-group">
-                        <label>Название турнира</label>
-                        <input type="text" id="tournamentName" value="${item ? item.name : ''}" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Дата</label>
-                        <input type="text" id="tournamentDate" value="${item ? item.date : ''}" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Призовой фонд</label>
-                        <input type="text" id="tournamentPrize" value="${item ? item.prize : ''}" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Статус</label>
-                        <select id="tournamentStatus">
-                            <option value="active" ${item && item.status === 'active' ? 'selected' : ''}>Активен</option>
-                            <option value="inactive" ${item && item.status === 'inactive' ? 'selected' : ''}>Завершен</option>
-                        </select>
-                    </div>
+            // 1. Получаем всех пользователей
+            const users = JSON.parse(localStorage.getItem('cs2_users') || '[]');
+            
+            // 2. Для каждого пользователя получаем его заказы
+            users.forEach(user => {
+                const ordersKey = `cs2_orders_${user.id}`;
+                const userOrders = JSON.parse(localStorage.getItem(ordersKey) || '[]');
+                
+                // Добавляем информацию о пользователе к каждому заказу
+                userOrders.forEach(order => {
+                    allOrders.push({
+                        ...order,
+                        userName: user.username,
+                        userFullName: `${user.firstName} ${user.lastName}`,
+                        userId: user.id
+                    });
+                });
+            });
+            
+            // 3. Сортируем по дате (сначала новые)
+            allOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // 4. Сохраняем в глобальную переменную
+            window.allOrders = allOrders;
+            
+            // 5. Обновляем статистику и таблицу
+            updateStats(allOrders);
+            renderOrders(allOrders);
+            
+            // Показываем уведомление
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #10b981;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 0.5rem;
+                z-index: 2000;
+                animation: fadeIn 0.3s ease;
+            `;
+            toast.innerHTML = `✅ Загружено ${allOrders.length} заказов`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+            
+            return allOrders;
+        }
+
+        function updateStats(orders) {
+            const total = orders.length;
+            const pending = orders.filter(o => o.status === 'pending' || o.status === 'processing').length;
+            const shipped = orders.filter(o => o.status === 'shipped' || o.status === 'delivered').length;
+            const cancelled = orders.filter(o => o.status === 'cancelled').length;
+
+            document.getElementById('statOrders').textContent = total;
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statShipped').textContent = shipped;
+            document.getElementById('statCancelled').textContent = cancelled;
+        }
+
+        function getStatusClass(status) {
+            return 'status-' + status;
+        }
+
+        function getStatusText(status) {
+            const statuses = {
+                'pending': 'Ожидает подтверждения',
+                'processing': 'В обработке',
+                'shipped': 'Отправлен',
+                'delivered': 'Доставлен',
+                'cancelled': 'Отменен'
+            };
+            return statuses[status] || status;
+        }
+
+        function renderOrders(orders) {
+            const tbody = document.getElementById('ordersList');
+            if (!tbody) return;
+
+            if (orders.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align:center;padding:2rem;color:#6b7280;">
+                            <div class="empty-state">
+                                <div class="icon">📦</div>
+                                <p>Заказов пока нет. Пользователи еще не сделали ни одного заказа.</p>
+                            </div>
+                        </td>
+                    </tr>
                 `;
-            } else if (type === 'news') {
-                modalTitle.innerText = currentEditId ? 'Редактировать новость' : 'Добавить новость';
-                modalFields.innerHTML = `
-                    <div class="modal-form-group">
-                        <label>Заголовок</label>
-                        <input type="text" id="newsTitle" value="${item ? item.title : ''}" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Дата</label>
-                        <input type="text" id="newsDate" value="${item ? item.date : ''}" required>
-                    </div>
-                    <div class="modal-form-group">
-                        <label>Категория</label>
-                        <input type="text" id="newsCategory" value="${item ? item.category : ''}" required>
-                    </div>
-                `;
+                return;
             }
-            modal.style.display = 'flex';
+
+            tbody.innerHTML = orders.map(order => `
+                <tr>
+                    <td><strong style="color:#ea580c;">#${order.id}</strong></td>
+                    <td>
+                        <div style="color:white;font-weight:500;">${order.userFullName || order.userName}</div>
+                        <div style="color:#9ca3af;font-size:0.75rem;">@${order.userName}</div>
+                    </td>
+                    <td style="color:#d1d5db;">${new Date(order.date).toLocaleDateString('ru-RU')} ${new Date(order.date).toLocaleTimeString('ru-RU', {hour:'2-digit',minute:'2-digit'})}</td>
+                    <td style="color:#ea580c;font-weight:700;">$${order.total.toFixed(2)}</td>
+                    <td><span class="status-badge ${getStatusClass(order.status)}">${order.statusText || getStatusText(order.status)}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-view" onclick="viewOrder(${order.id})">📋</button>
+                            ${order.status === 'pending' ? `<button class="btn-action btn-confirm" onclick="updateOrderStatus(${order.id}, 'processing')">✅</button>` : ''}
+                            ${order.status === 'processing' ? `<button class="btn-action btn-shipped" onclick="updateOrderStatus(${order.id}, 'shipped')">📦</button>` : ''}
+                            ${order.status === 'shipped' ? `<button class="btn-action btn-delivered" onclick="updateOrderStatus(${order.id}, 'delivered')">✅</button>` : ''}
+                            ${(order.status === 'pending' || order.status === 'processing') ? `<button class="btn-action btn-cancel" onclick="updateOrderStatus(${order.id}, 'cancelled')">❌</button>` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getOrderById(orderId) {
+            if (!window.allOrders) {
+                window.allOrders = loadAllOrders();
+            }
+            return window.allOrders.find(o => o.id === orderId);
+        }
+
+        function viewOrder(orderId) {
+            const order = getOrderById(orderId);
+            if (!order) {
+                alert('Заказ не найден. Обновите страницу.');
+                return;
+            }
+
+            document.getElementById('modalOrderId').textContent = orderId;
+
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div class="order-info">
+                    <p><strong>Пользователь:</strong> ${order.userFullName || order.userName} (@${order.userName})</p>
+                    <p><strong>Дата:</strong> ${new Date(order.date).toLocaleString('ru-RU')}</p>
+                    <p><strong>Статус:</strong> <span class="status-badge ${getStatusClass(order.status)}">${order.statusText || getStatusText(order.status)}</span></p>
+                    ${order.tradeLink ? `<p><strong>Трейд ссылка:</strong> <a href="${order.tradeLink}" target="_blank" style="color:#60a5fa;">${order.tradeLink}</a></p>` : ''}
+                    ${order.cancelReason ? `<p><strong>Причина отмены:</strong> ${order.cancelReason}</p>` : ''}
+                </div>
+                <div style="border-top:1px solid #374151;padding-top:1rem;">
+                    <h4 style="color:white;margin-bottom:0.5rem;">Товары:</h4>
+                    ${order.items.map(item => `
+                        <div style="display:flex;justify-content:space-between;color:#9ca3af;padding:0.25rem 0;border-bottom:1px solid rgba(55,65,81,0.3);">
+                            <span>${item.name} x ${item.quantity}</span>
+                            <span>$${(parseFloat(String(item.price).replace('$', '')) * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `).join('')}
+                    <div style="display:flex;justify-content:space-between;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid #374151;">
+                        <span style="color:white;font-weight:600;">Итого:</span>
+                        <span style="color:#ea580c;font-weight:700;">$${order.total.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+
+            const actions = document.getElementById('modalActions');
+            let buttons = `<button class="btn-modal-close" onclick="closeModal()">Закрыть</button>`;
+
+            if (order.status === 'pending') {
+                buttons += `<button class="btn-modal-confirm" onclick="updateOrderStatus(${order.id}, 'processing');closeModal();">✅ Подтвердить</button>`;
+                buttons += `<button class="btn-modal-cancel" onclick="updateOrderStatus(${order.id}, 'cancelled');closeModal();">❌ Отменить</button>`;
+            } else if (order.status === 'processing') {
+                buttons += `<button class="btn-modal-shipped" onclick="updateOrderStatus(${order.id}, 'shipped');closeModal();">📦 Отправить</button>`;
+                buttons += `<button class="btn-modal-cancel" onclick="updateOrderStatus(${order.id}, 'cancelled');closeModal();">❌ Отменить</button>`;
+            } else if (order.status === 'shipped') {
+                buttons += `<button class="btn-modal-delivered" onclick="updateOrderStatus(${order.id}, 'delivered');closeModal();">✅ Доставлен</button>`;
+            }
+
+            actions.innerHTML = buttons;
+
+            document.getElementById('orderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateOrderStatus(orderId, newStatus) {
+            const order = getOrderById(orderId);
+            if (!order) {
+                alert('Заказ не найден. Обновите страницу.');
+                return;
+            }
+
+            const statusTexts = {
+                'processing': 'В обработке',
+                'shipped': 'Отправлен',
+                'delivered': 'Доставлен',
+                'cancelled': 'Отменен'
+            };
+
+            if (newStatus === 'cancelled' && order.status !== 'cancelled') {
+                const reason = prompt('Укажите причину отмены заказа:');
+                if (reason === null) return;
+                order.cancelReason = reason || 'Отменен администратором';
+            }
+
+            // Обновляем заказ в localStorage пользователя
+            const users = JSON.parse(localStorage.getItem('cs2_users') || '[]');
+            const user = users.find(u => u.id === order.userId);
+            
+            if (user) {
+                const ordersKey = `cs2_orders_${user.id}`;
+                const userOrders = JSON.parse(localStorage.getItem(ordersKey) || '[]');
+                const orderIndex = userOrders.findIndex(o => o.id === orderId);
+                
+                if (orderIndex !== -1) {
+                    userOrders[orderIndex].status = newStatus;
+                    userOrders[orderIndex].statusText = statusTexts[newStatus];
+                    if (newStatus === 'cancelled') {
+                        userOrders[orderIndex].cancelReason = order.cancelReason;
+                    }
+                    localStorage.setItem(ordersKey, JSON.stringify(userOrders));
+                }
+            }
+
+            // Обновляем в глобальном массиве
+            if (window.allOrders) {
+                const index = window.allOrders.findIndex(o => o.id === orderId);
+                if (index !== -1) {
+                    window.allOrders[index].status = newStatus;
+                    window.allOrders[index].statusText = statusTexts[newStatus];
+                    if (newStatus === 'cancelled') {
+                        window.allOrders[index].cancelReason = order.cancelReason;
+                    }
+                }
+            }
+
+            // Обновляем отображение
+            updateStats(window.allOrders || []);
+            renderOrders(window.allOrders || []);
+
+            const messages = {
+                'processing': '✅ Заказ подтвержден!',
+                'shipped': '📦 Заказ отправлен!',
+                'delivered': '✅ Заказ доставлен!',
+                'cancelled': '❌ Заказ отменен!'
+            };
+
+            alert(messages[newStatus] || 'Статус обновлен!');
         }
 
         function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-            currentEditId = null;
+            document.getElementById('orderModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
-        document.getElementById('modalForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (currentModalType === 'tournament') {
-                const name = document.getElementById('tournamentName').value;
-                const date = document.getElementById('tournamentDate').value;
-                const prize = document.getElementById('tournamentPrize').value;
-                const status = document.getElementById('tournamentStatus').value;
-                
-                if (currentEditId) {
-                    const index = tournaments.findIndex(t => t.id === currentEditId);
-                    if (index !== -1) {
-                        tournaments[index] = { ...tournaments[index], name, date, prize, status };
-                    }
-                } else {
-                    tournaments.push({
-                        id: tournaments.length + 1,
-                        name,
-                        date,
-                        prize,
-                        status
-                    });
-                }
-                renderTournaments();
-            } else if (currentModalType === 'news') {
-                const title = document.getElementById('newsTitle').value;
-                const date = document.getElementById('newsDate').value;
-                const category = document.getElementById('newsCategory').value;
-                
-                if (currentEditId) {
-                    const index = news.findIndex(n => n.id === currentEditId);
-                    if (index !== -1) {
-                        news[index] = { ...news[index], title, date, category };
-                    }
-                } else {
-                    news.push({
-                        id: news.length + 1,
-                        title,
-                        date,
-                        category
-                    });
-                }
-                renderNews();
-            }
-            updateStats();
-            closeModal();
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
         });
 
-        // Навигация по страницам
-        function loadPage(page) {
-            const pageTitle = document.getElementById('pageTitle');
-            const content = document.getElementById('pageContent');
-            
-            if (page === 'dashboard') {
-                pageTitle.innerText = 'Дашборд';
-                content.innerHTML = `
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-header"><span class="stat-title">Всего турниров</span>
-                                <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div class="stat-value">${tournaments.length}</div>
-                        </div>
-                        <div class="stat-card"><div class="stat-header"><span class="stat-title">Всего команд</span>
-                                <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
-                            </div><div class="stat-value">256</div>
-                        </div>
-                        <div class="stat-card"><div class="stat-header"><span class="stat-title">Всего игроков</span>
-                                <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                            </div><div class="stat-value">850</div>
-                        </div>
-                        <div class="stat-card"><div class="stat-header"><span class="stat-title">Пользователей</span>
-                                <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
-                            </div><div class="stat-value">1247</div>
-                        </div>
-                    </div>
-                    <div class="section-card">
-                        <div class="section-header"><h3 class="section-title">Последние турниры</h3>
-                            <button class="btn-add" onclick="openModal('tournament')">+ Добавить турнир</button>
-                        </div>
-                        <div class="data-table"><table><thead><tr><th>Название</th><th>Дата</th><th>Призовой фонд</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="tournamentsList"></tbody></table></div>
-                    </div>
-                    <div class="section-card">
-                        <div class="section-header"><h3 class="section-title">Последние новости</h3>
-                            <button class="btn-add" onclick="openModal('news')">+ Добавить новость</button>
-                        </div>
-                        <div class="data-table"><table><thead><tr><th>Заголовок</th><th>Дата</th><th>Категория</th><th>Действия</th></tr></thead><tbody id="newsList"></tbody></table></div>
-                    </div>
-                `;
-                renderTournaments();
-                renderNews();
-            } else {
-                pageTitle.innerText = page === 'tournaments' ? 'Управление турнирами' :
-                                     page === 'teams' ? 'Управление командами' :
-                                     page === 'news' ? 'Управление новостями' :
-                                     page === 'products' ? 'Управление товарами' :
-                                     page === 'players' ? 'Управление игроками' : 'Управление пользователями';
-                content.innerHTML = `<div class="section-card"><div class="section-header"><h3 class="section-title">${pageTitle.innerText}</h3><button class="btn-add">+ Добавить</button></div><div class="data-table"><table><thead><tr><th>ID</th><th>Название</th><th>Действия</th></tr></thead><tbody><tr><td colspan="3" style="text-align:center; padding:3rem; color:#6b7280;">Раздел в разработке</td></tr></tbody></table></div></div>`;
-            }
-        }
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
-        // Обработчики навигации
+        // Навигация
         document.querySelectorAll('.sidebar-link[data-page]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
-                loadPage(link.dataset.page);
+                const page = link.dataset.page;
+                
+                if (page === 'dashboard' || page === 'orders') {
+                    document.getElementById('pageTitle').textContent = page === 'dashboard' ? 'Дашборд' : 'Управление заказами';
+                    const content = document.getElementById('pageContent');
+                    content.innerHTML = `
+                        <div class="stats-grid" id="statsGrid">
+                            <div class="stat-card"><div class="stat-number" id="statOrders">0</div><div class="stat-label">Всего заказов</div></div>
+                            <div class="stat-card"><div class="stat-number" id="statPending">0</div><div class="stat-label">Ожидают обработки</div></div>
+                            <div class="stat-card"><div class="stat-number" id="statShipped">0</div><div class="stat-label">Отправлено</div></div>
+                            <div class="stat-card"><div class="stat-number" id="statCancelled">0</div><div class="stat-label">Отменено</div></div>
+                        </div>
+                        <div class="section-card">
+                            <div class="section-header">
+                                <h3 class="section-title">Все заказы</h3>
+                                <button class="btn-action btn-refresh" onclick="loadAllOrders()">🔄 Обновить</button>
+                            </div>
+                            <div class="table-wrapper">
+                                <table><thead><tr><th>ID</th><th>Пользователь</th><th>Дата</th><th>Сумма</th><th>Статус</th><th>Действия</th></tr></thead><tbody id="ordersList"></tbody></table>
+                            </div>
+                        </div>
+                    `;
+                    const orders = loadAllOrders();
+                    updateStats(orders);
+                    renderOrders(orders);
+                } else {
+                    document.getElementById('pageTitle').textContent = 
+                        page === 'tournaments' ? 'Управление турнирами' :
+                        page === 'news' ? 'Управление новостями' :
+                        page === 'products' ? 'Управление товарами' :
+                        'Управление пользователями';
+                    document.getElementById('pageContent').innerHTML = `
+                        <div class="section-card">
+                            <div class="section-header"><h3 class="section-title">${document.getElementById('pageTitle').textContent}</h3><button class="btn-add">+ Добавить</button></div>
+                            <div class="empty-state"><div class="icon">🚧</div><p>Раздел в разработке</p></div>
+                        </div>
+                    `;
+                }
             });
         });
 
         document.getElementById('logoutLink').addEventListener('click', (e) => {
             e.preventDefault();
-            localStorage.removeItem('adminLoggedIn');
-            window.location.href = 'admin-login.html';
+            if (confirm('Вы уверены, что хотите выйти?')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'admin-login.html';
+            }
         });
 
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        // Инициализация
-        renderTournaments();
-        renderNews();
-        updateStats();
+        // Добавляем стили для анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Инициализация - загружаем все заказы
+        const initialOrders = loadAllOrders();
+        updateStats(initialOrders);
+        renderOrders(initialOrders);
     </script>
 </body>
 </html>
